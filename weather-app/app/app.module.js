@@ -13,13 +13,15 @@ var platform_browser_1 = require('@angular/platform-browser');
 var http_1 = require("@angular/http");
 var app_component_1 = require('./app.component');
 var weather_component_1 = require("./weather-widget/component/weather.component");
+var speed_unit_pipe_1 = require('./weather-widget/pipe/speed-unit.pipe');
+var degrees_unit_pipe_1 = require('./weather-widget/pipe/degrees-unit.pipe');
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule, http_1.JsonpModule],
-            declarations: [app_component_1.AppComponent, weather_component_1.WeatherComponent],
+            imports: [platform_browser_1.BrowserModule, http_1.JsonpModule, http_1.HttpModule],
+            declarations: [app_component_1.AppComponent, weather_component_1.WeatherComponent, speed_unit_pipe_1.SpeedUnitPipe, degrees_unit_pipe_1.DegreeUnit],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
