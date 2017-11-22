@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var weather_service_1 = require('../service/weather.service');
 var weather_1 = require('../model/weather');
+var constant_1 = require('../constants/constant');
 var WeatherComponent = (function () {
     function WeatherComponent(service) {
         this.service = service;
@@ -18,7 +19,8 @@ var WeatherComponent = (function () {
         this.currentSpeedUnit = "kph";
         this.currentTempUnit = "celcius";
         this.currentLocation = "";
-        this.icons = new Skycons({ "color": "#FFF" });
+        this.icons = new Skycons();
+        this.dataRecieved = false;
     }
     WeatherComponent.prototype.ngOnInit = function () {
         this.getCurrentLocation();
@@ -43,6 +45,7 @@ var WeatherComponent = (function () {
                 _this.weatherData.icon = weather["currently"]["icon"];
             console.log("Weather: ", _this.weatherData);
             _this.setIcon();
+            _this.dataRecieved = true;
         }, function (err) { return console.error(err); });
     };
     WeatherComponent.prototype.getLocationName = function () {
@@ -75,6 +78,16 @@ var WeatherComponent = (function () {
     WeatherComponent.prototype.setIcon = function () {
         this.icons.add("icon", this.weatherData.icon);
         this.icons.play();
+    };
+    WeatherComponent.prototype.setStyles = function () {
+        if (this.weatherData.icon) {
+            this.icons.color = constant_1.WEATHER_COLORS[this.weatherData.icon]["color"];
+            return constant_1.WEATHER_COLORS[this.weatherData.icon];
+        }
+        else {
+            this.icons.color = constant_1.WEATHER_COLORS["default"]["color"];
+            return constant_1.WEATHER_COLORS["default"];
+        }
     };
     WeatherComponent = __decorate([
         core_1.Component({
